@@ -3,18 +3,20 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 import MainNavigation from "./mod_shared/components/Navigation/MainNavigation";
 import Home from "./mod_home/pages/Home";
-// import { useState, useEffect } from "react";
+import Login from "./mod_login/components/Login";
 
+import { useState, useEffect } from "react";
 
-// const [data, setData] = useState({});
-//
-// useEffect(() => {
-//   fetch("/home")
-//     .then(res => res.json())
-//     .then(data => setData(data))
-// }, [])
 
 function App() {
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    fetch("/api/auth/home")
+      .then(res => res.json())
+      .then(data => setData(data))
+  }, [])
+
   return (
     <Router>
       <MainNavigation />
@@ -24,6 +26,9 @@ function App() {
           <div className="col content">
             <Routes>
               <Route path="/" exact element={<Home />} />
+              <Route path="/login" exact element={<Login />} />
+              <Route path="/u/:userId" exact element={<Home />} />
+            {/*  <Route path="/" exact element={<Home />} />*/}
               {/*<Route path="/users" element={<Users />} />*/}
               {/*<Route path="/clubs" element={<AllClubs />} />*/}
               {/*<Route path="/new/club" element={<NewClub />} />*/}
