@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
 
-const NavLinks = () => {
+const NavLinks = (props) => {
   return (
     <ul className="navbar-nav mr-auto">
 
@@ -13,13 +13,15 @@ const NavLinks = () => {
         <NavLink end className="nav-link" to="/profile">Profile</NavLink>
       </li>
 
-      <li className="nav-item">
-        <NavLink end className="nav-link" to="/login">login</NavLink>
-      </li>
+      {/*<li className="nav-item">*/}
+      {/*  <NavLink end className="nav-link" to="/login">login</NavLink>*/}
+      {/*</li>*/}
 
-      <li className="nav-item">
-        <NavLink end className="nav-link" to="/register">Register</NavLink>
-      </li>
+      {/*<li className="nav-item">*/}
+      {/*  <NavLink end className="nav-link" to="/register">Register</NavLink>*/}
+      {/*</li>*/}
+
+      {props.sendNav}
 
     </ul>
   );

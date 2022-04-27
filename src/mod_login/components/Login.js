@@ -4,11 +4,6 @@ import { useEffect } from "react";
 const Login = () => {
   const history = useNavigate()
 
-  const handleLogout = (e) => {
-    e.preventDefault()
-    localStorage.removeItem("token");
-  }
-
   const handleLogin = (e) => {
     e.preventDefault()
 
@@ -27,27 +22,17 @@ const Login = () => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log("data", data)
         localStorage.setItem("token", data.token)
       })
   }
 
-  useEffect(() => {
-    fetch("/api/auth/getUsername", {
-      headers: {
-        "x-access-token": localStorage.getItem("token")
-      }
-    })
-      .then(res => res.json())
-      .then(data => data.isLoggedIn ? history.push("/dashboard") : null)
-  }, [])
 
   return  (
     <form onSubmit={event => handleLogin(event)}>
       <input required type={"email"} />
       <input required type={"password"} />
       <input type={"submit"} value={"Go!"} />
-      <input onClick={handleLogout} type={"button"} value={"Logout!"} />
+      {/*<input onClick={handleLogout} type={"button"} value={"Logout!"} />*/}
     </form>
   )
 }
