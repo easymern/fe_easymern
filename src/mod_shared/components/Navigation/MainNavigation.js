@@ -11,15 +11,15 @@ const MainNavigation = (props) => {
   // TODO this can be set as global state since it won't change throughout
   const [username, setUsername] = useState("")
 
-  useEffect(() => {
-    fetch("/api/auth/isUserAuth", {
-      headers: {
-        "x-access-token": localStorage.getItem("token")
-      }
-    })
-      .then(res => res.json())
-      .then(data => data.isLoggedIn ? setUsername(data.username) : null )
-  }, []);
+  // useEffect(() => {
+  //   fetch("/api/auth/isUserAuth", {
+  //     headers: {
+  //       "x-access-token": localStorage.getItem("token")
+  //     }
+  //   })
+  //     .then(res => res.json())
+  //     .then(data => data.isLoggedIn ? setUsername(data.username) : null )
+  // }, []);
 
   async function logout() {
     localStorage.removeItem("token")

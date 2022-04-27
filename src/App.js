@@ -9,13 +9,13 @@ import { useState, useEffect } from "react";
 
 
 function App() {
-  const [data, setData] = useState({});
-
-  useEffect(() => {
-    fetch("/api/auth/home")
-      .then(res => res.json())
-      .then(data => setData(data))
-  }, [])
+  // const [data, setData] = useState({});
+  //
+  // useEffect(() => {
+  //   fetch("/api/auth/home")
+  //     .then(res => res.json())
+  //     .then(data => setData(data))
+  // }, [])
 
   return (
     <Router>
@@ -25,7 +25,7 @@ function App() {
         <div className="row">
           <div className="col content">
             <Routes>
-              <Route path="/" exact element={<Home />} />
+              <Route path="/home" exact element={<Home />} />
               <Route path="/login" exact element={<Login />} />
               <Route path="/u/:userId" exact element={<Home />} />
             {/*  <Route path="/" exact element={<Home />} />*/}
