@@ -5,7 +5,7 @@ import MainHeader from "./MainHeader";
 import { useNavigate, NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-const MainNavigation = (props) => {
+const MainNavigation = () => {
   const history = useNavigate();
 
   // TODO this can be set as global state since it won't change throughout

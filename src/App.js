@@ -1,26 +1,52 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 
 import MainNavigation from "./mod_shared/components/Navigation/MainNavigation";
 import Home from "./mod_home/pages/Home";
 import Login from "./mod_login/components/Login";
-
-// import { useState, useEffect } from "react";
+import AuthService from "./services/auth.service";
+import Register from "./mod_login/components/Register";
 
 
 function App() {
-  // const [data, setData] = useState({});
-  //
-  // useEffect(() => {
-  //   fetch("/api/auth/home")
-  //     .then(res => res.json())
-  //     .then(data => setData(data))
-  // }, [])
+  // Establish state
+  const [currentUser, setCurrentUser] = useState(undefined);
+  const [showModerator, setShowModerator] = useState(false);
+  const [showAdmin, setShowAdmin] = useState(false);
+
+  useEffect( () => {
+    const user =  AuthService.getCurrentUser();
+
+    if (user) {
+      setCurrentUser();
+      setShowModerator(user.roles.includes("ROLE_MODERATOR"));
+      setShowAdmin(user.roles.includes("ROLE_ADMIN"));
+    }
+
+    // TODO add event bus.
+  }, []);
+
+  const logout = () => {
+    AuthService.logout();
+    setShowAdmin(false);
+    setShowModerator(false);
+    setCurrentUser(undefined);
+  }
 
   return (
     <Router>
-      <MainNavigation />
+      <MainNavigation/>
+        {/*TODO shift this to nav bar.*/}
+        <ul >
+          <li className="nav-item">
+            <a href="/login" className="nav-link" onClick={logout}>
+              LogOut
+            </a>
+          </li>
+        </ul>
+
       {/*<div className="App">*/}
       <div className="container-fluid">
         <div className="row">
@@ -28,7 +54,8 @@ function App() {
             <Routes>
               <Route path="/" exact element={<Home />} />
               <Route path="/login" exact element={<Login />} />
-              <Route path="/u/:userId" exact element={<Home />} />
+              <Route path="/register" exact element={<Register />} />
+              {/*<Route path="/u/:userId" exact element={<Home />} />*/}
             {/*  <Route path="/" exact element={<Home />} />*/}
               {/*<Route path="/users" element={<Users />} />*/}
               {/*<Route path="/clubs" element={<AllClubs />} />*/}
