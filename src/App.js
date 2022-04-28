@@ -6,7 +6,7 @@ import MainNavigation from "./mod_shared/components/Navigation/MainNavigation";
 import Home from "./mod_home/pages/Home";
 import Login from "./mod_login/components/Login";
 
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
         <div className="row">
           <div className="col content">
             <Routes>
-              <Route path="/home" exact element={<Home />} />
+              <Route path="/" exact element={<Home />} />
               <Route path="/login" exact element={<Login />} />
               <Route path="/u/:userId" exact element={<Home />} />
             {/*  <Route path="/" exact element={<Home />} />*/}
