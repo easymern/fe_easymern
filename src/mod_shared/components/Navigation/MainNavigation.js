@@ -3,48 +3,17 @@ import MainHeader from "./MainHeader";
 // import NavLinks from "./NavLinks";
 
 import { useNavigate, NavLink } from "react-router-dom";
-import { useState, useEffect } from "react";
+// import { useEffect, useState } from "react";
+// import EventBus from "../../../common/EventBus";
+// import AuthService from "../../../services/auth.service";
+import { useAuth } from "../../../services/auth.service";
 
-const MainNavigation = () => {
-  const history = useNavigate();
-
-  // TODO this can be set as global state since it won't change throughout
-  const [username, setUsername] = useState("")
-
-  // useEffect(() => {
-  //   fetch("/api/auth/isUserAuth", {
-  //     headers: {
-  //       "x-access-token": localStorage.getItem("token")
-  //     }
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => data.isLoggedIn ? setUsername(data.username) : null )
-  // }, []);
-
-  async function logout() {
-    localStorage.removeItem("token")
-    await history.push("/login")
-  }
-
-  const user_menu =
-    username ?
-        <React.Fragment>
-          <li className="nav-item">
-            <NavLink className="nav-link" to={"/u/" + username}>Profile</NavLink>
-          </li>
-          <li className="nav-item">
-            <div className="nav-link" onClick={logout}>Logout</div>
-          </li>
-        </React.Fragment>
-        :
-        <React.Fragment>
-          <li className="nav-item">
-            <NavLink className="nav-link" to={"/login"}>Login</NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to={"/register"}>Register</NavLink>
-          </li>
-        </React.Fragment>
+const MainNavigation = (props) => {
+  const { user, logout } = useAuth();
+  console.log("username: ", user)
+  // const logout = () => {
+  //   AuthService.logout();
+  // }
 
   return (
     <MainHeader>
@@ -55,8 +24,28 @@ const MainNavigation = () => {
             <NavLink className="nav-link" to="/">Home</NavLink>
           </li>
 
-          {user_menu}
 
+          {user ?
+            <React.Fragment>
+              <li className="nav-item">
+                <NavLink className="nav-link" to={"/u/" + "insertUname"}>Profile</NavLink>
+              </li>
+              <li className="nav-item">
+                <a href="/login" className="nav-link" onClick={logout}>
+                  Logout dude
+                </a>
+              </li>
+            </React.Fragment>
+            :
+            <React.Fragment>
+              <li className="nav-item">
+                <NavLink className="nav-link" to={"/login"}>Login</NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to={"/register"}>Register</NavLink>
+              </li>
+            </React.Fragment>
+          }
         </ul>
 
         {/*<NavLinks sendNav={sendNav} />*/}

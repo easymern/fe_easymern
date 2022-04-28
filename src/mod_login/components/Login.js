@@ -2,20 +2,30 @@ import React, { useState } from 'react';
 import {useForm} from 'react-hook-form';
 import { useNavigate } from "react-router-dom";
 
-import AuthService from "../../services/auth.service";
+// import AuthService from "../../services/auth.service";
+
+import {useAuth} from "../../services/auth.service";
+
 
 
 const Login = () => {
+  // const {login, logout } = useAuth();
+  // login.logout();
+
+  const { login } = useAuth()
+
   const [loading, setLoading] = useState(false);
   // Use the forms state for the form.
   const { register, handleSubmit, formState: { errors } } = useForm();
   const history = useNavigate();
 
+
+
   const onSubmit = async data => {
-    setLoading(true);
-    await AuthService.login(data.username, data.password)
+    login(data.username, data.password)
       .then(setLoading(false))
-      .then(history("/"))
+      .then(console.log("done"))
+    //   .then(history("/"))
   }
 
 

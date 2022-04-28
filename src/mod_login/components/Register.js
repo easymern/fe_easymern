@@ -41,6 +41,7 @@ const Register = () => {
       .then(setLoading(false))
       .then(history("/login"))
     // TODO add global state for flash message "thanks you can now login"
+    // TODO check for errors parsed from backend (ie duplicate user)
   }
 
   return (
@@ -80,7 +81,6 @@ const Register = () => {
               placeholder="again"
               {...register('confirmPassword')}
               className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
-              // className={`form-control ${errors.confirmPassword? 'is-valid' : ''}`}
             />
             <div className="invalid-feedback">{errors.confirmPassword?.message}</div>
           </div>
