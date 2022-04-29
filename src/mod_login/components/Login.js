@@ -2,13 +2,11 @@ import React, { useState, useContext } from 'react';
 import {set, useForm} from 'react-hook-form';
 import { useNavigate } from "react-router-dom";
 
-// import AuthService from "../../services/auth.service";
-
 import {AuthContext} from "../../mod_shared/context/auth-context";
 
 const Login = () => {
   const auth = useContext(AuthContext);
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -23,9 +21,11 @@ const Login = () => {
   };
 
   const onSubmit = async data => {
+
     if (isLoginMode) {
       try {
-        auth.login(data.username, data.password)
+        await auth.login(data.username, data.password);
+        navigate("/", { replace: true });
       } catch (err) {}
     } else {
       try {

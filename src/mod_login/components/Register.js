@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from 'yup';
 
-import { useNavigate } from "react-router-dom";
-
-import AuthService from "../../services/auth.service";
+import { AuthContext } from "../../mod_shared/context/auth-context";
 
 const Register = () => {
+  const auth = useContext(AuthContext);
+  const history = useNavigate();
   const [loading, setLoading] = useState(false);
-  // Use the forms state for the form.
 
   // Using yup as per this example https://www.positronx.io/add-confirm-password-validation-in-react-with-hook-form/
   const formSchema = Yup.object().shape({
@@ -32,16 +32,17 @@ const Register = () => {
   const { register, handleSubmit, reset, formState } = useForm(formOptions);
   const { errors } = formState;
 
-  const history = useNavigate();
-
   const onSubmit = async data => {
-    console.log(JSON.stringify(data));
-    setLoading(true);
-    await AuthService.register(data.username, data.email, data.password)
-      .then(setLoading(false))
-      .then(history("/login"))
-    // TODO add global state for flash message "thanks you can now login"
-    // TODO check for errors parsed from backend (ie duplicate user)
+      try {
+        await auth.login(data.username, data.password);
+        // navigate("/", { replace: true });
+      } catch (err) {}
+
+    // console.log(JSON.stringify(data));
+    // await AuthService.register(data.username, data.email, data.password)
+    //   .then(history("/login"))
+    // // TODO add global state for flash message "thanks you can now login"
+    // // TODO check for errors parsed from backend (ie duplicate user)
   }
 
   return (
@@ -85,12 +86,7 @@ const Register = () => {
             <div className="invalid-feedback">{errors.confirmPassword?.message}</div>
           </div>
 
-          <input type="submit" />
-          <div className={"form-group"}>
-            {loading && (
-              <span className="spinner-border spinner-border-sm"></span>
-            )}
-          </div>
+          <input type="submit" value={"register"} />
         </form>
       </div>
     </div>
