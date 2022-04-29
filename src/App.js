@@ -1,5 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import { useState, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
+
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 
@@ -57,21 +62,11 @@ function App() {
         <div className="container-fluid">
           <div className="row">
             <div className="col content">
-
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/login" exact element={<Login />} />
                   <Route path="/register" exact element={<Register />} />
-                  {/*<Route path="/u/:userId" exact element={<Home />} />*/}
-                {/*  <Route path="/" exact element={<Home />} />*/}
-                  {/*<Route path="/users" element={<Users />} />*/}
-                  {/*<Route path="/clubs" element={<AllClubs />} />*/}
-                  {/*<Route path="/new/club" element={<NewClub />} />*/}
-                  {/*<Route path="/new/syndicate" element={<NewClub />} />*/}
-                  {/*<Route path="/new/ticket" element={<NewClub />} />*/}
-                  {/*<Route path="/:userId/clubs" exact element={<UserClubs />} />*/}
                 </Routes>
-
             </div>
           </div>
           <div className="footer">
