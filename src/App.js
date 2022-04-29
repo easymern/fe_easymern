@@ -1,82 +1,74 @@
 import {
   BrowserRouter as Router,
-  Routes,
-  Route
+  Route,
+  Redirect,
+  Switch
 } from "react-router-dom";
 
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 
-// import AuthService from "./services/auth.service";
-import { ProvideAuth } from "./services/auth.service";
-
-import EventBus from "./common/EventBus";
-
 import MainNavigation from "./mod_shared/components/Navigation/MainNavigation";
 import Home from "./mod_home/pages/Home";
 import Login from "./mod_login/components/Login";
 import Register from "./mod_login/components/Register";
+import Footer from "./mod_shared/components/Navigation/Footer";
 
-// TODO pick it up here with some magical hooks https://usehooks.com/
+import { AuthContext } from "./mod_shared/context/auth-context";
+
+
 function App() {
-  // // Establish state
-  // const [currentUser, setCurrentUser] = useState(undefined);
-  // const [username, setUsername] = useState(undefined)
-  // const [showModerator, setShowModerator] = useState(false);
-  // const [showAdmin, setShowAdmin] = useState(false);
-  //
-  // useEffect( () => {
-  //   const user =  AuthService.getCurrentUser();
-  //
-  //   if (user) {
-  //     setCurrentUser(user);
-  //     setShowModerator(user.roles.includes("ROLE_MODERATOR"));
-  //     setShowAdmin(user.roles.includes("ROLE_ADMIN"));
-  //   }
-  //
-  //   EventBus.on("logout", () => {
-  //     logout();
-  //   });
-  //
-  //   return () => {
-  //     EventBus.remove("logout")
-  //   };
-  //
-  // }, []);
-  //
-  // const logout = () => {
-  //   AuthService.logout();
-  //   setShowAdmin(false);
-  //   setShowModerator(false);
-  //   setCurrentUser(undefined);
-  // }
+  const { token, login, logout, userId } = useAuth();
+  let routes;
+  if (token) {
+    routes = (
+      <Switch>
+        <Route path={"/"} exact>
+          <Home />
+        </Route>
+        <Redirect to="/" />
+      </Switch>
+    );
+  } else {
+    routes = (
+      <Switch>
+        <Route path={"/"} exact>
+          <Home />
+        </Route>
+        <Route path="/login" exact>
+          <Login />
+        </Route>
+        <Route path="/register" exact>
+          <Register />
+        </Route>
+        <Redirect to={"/login"} />
+      </Switch>
+    );
+  }
 
   return (
-
-      <Router>
-        <ProvideAuth>
-        <MainNavigation username="manual"/>
-
-        {/*<div className="App">*/}
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col content">
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/login" exact element={<Login />} />
-                  <Route path="/register" exact element={<Register />} />
-                </Routes>
-            </div>
+    <AuthContext.Provider
+      value={{
+        isLoggedIn: !!token,
+        token: token,
+        userId: userId,
+        login: login,
+        logout: logout
+      }}
+    >
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col content">
+            <Router>
+              <MainNavigation />
+              <main>{routes}</main>
+            </Router>
           </div>
-          <div className="footer">
-            <p>Created by @jayArghArgh</p>
-          </div>
-
         </div>
-        {/*</div>*/}
-        </ProvideAuth>
-      </Router>
+        <Footer />
+      </div>
+    </AuthContext.Provider>
 
   );
 }
