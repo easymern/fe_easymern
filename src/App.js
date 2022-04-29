@@ -1,8 +1,9 @@
 import {
   BrowserRouter as Router,
   Route,
-  Redirect,
-  Switch
+  Navigate,
+  Routes,
+  // Switch
 } from "react-router-dom";
 
 
@@ -16,6 +17,7 @@ import Register from "./mod_login/components/Register";
 import Footer from "./mod_shared/components/Navigation/Footer";
 
 import { AuthContext } from "./mod_shared/context/auth-context";
+import { useAuth } from "./mod_shared/hooks/auth-hook";
 
 
 function App() {
@@ -23,27 +25,20 @@ function App() {
   let routes;
   if (token) {
     routes = (
-      <Switch>
-        <Route path={"/"} exact>
-          <Home />
-        </Route>
-        <Redirect to="/" />
-      </Switch>
+      <Routes>
+        <Route path={"/"} exact element={<Home />} />
+        <Route path="/" element={<Navigate replace to="/home" />} />
+      </Routes>
     );
   } else {
     routes = (
-      <Switch>
-        <Route path={"/"} exact>
-          <Home />
-        </Route>
-        <Route path="/login" exact>
-          <Login />
-        </Route>
-        <Route path="/register" exact>
-          <Register />
-        </Route>
-        <Redirect to={"/login"} />
-      </Switch>
+      <Routes>
+        <Route path={"/"} exact element={<Home />} />
+        <Route path="/login" exact element={<Login />} />
+
+        <Route path="/register" exact element={<Register />} />
+        <Route path="/" element={<Navigate replace to="/login" />} />
+      </Routes>
     );
   }
 
