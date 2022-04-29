@@ -1,10 +1,21 @@
 import { useState, useCallback, useEffect } from "react";
+import axios from "axios";
 let logoutTimer;
 
 export const useAuth = () => {
+  const API_URL = "http://localhost:3001/api-v1/auth/";
   const [token, setToken] = useState(false);
   const [tokenExpirationDate, setTokenExpirationDate] = useState();
   const [userId, setUserId] = useState(false);
+
+
+  const signup = useCallback((username, email, password) => {
+    axios.post(API_URL + "register", {
+      username,
+      email,
+      password
+    }).then(res => this.login(username, email))
+  }, [])
 
   const login = useCallback((uid, token, expirationDate) => {
     // Set a token for storage.
@@ -49,6 +60,7 @@ export const useAuth = () => {
 
   return {
     token,
+    signup,
     login,
     logout,
     userId
