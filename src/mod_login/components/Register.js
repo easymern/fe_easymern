@@ -34,7 +34,7 @@ const Register = () => {
 
   const onSubmit = async data => {
       try {
-        await auth.login(data.username, data.password);
+        await auth.signup(data.username, data.email, data.password);
         // navigate("/", { replace: true });
       } catch (err) {}
 
