@@ -1,33 +1,38 @@
-import React, { useState } from 'react';
-import {useForm} from 'react-hook-form';
+import React, { useState, useContext } from 'react';
+import {set, useForm} from 'react-hook-form';
 import { useNavigate } from "react-router-dom";
 
 // import AuthService from "../../services/auth.service";
 
-import {useAuth} from "../../services/auth.service";
-
-
+import {AuthContext} from "../../mod_shared/context/auth-context";
 
 const Login = () => {
-  // const {login, logout } = useAuth();
-  // login.logout();
-
-  const { login } = useAuth()
-
-  const [loading, setLoading] = useState(false);
-  // Use the forms state for the form.
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const auth = useContext(AuthContext);
   const history = useNavigate();
 
+  const [isLoginMode, setIsLoginMode] = useState(true);
+  const [loading, setLoading] = useState(false);
 
+
+  // Use the forms state for the form.
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  // Switch between login / register (not built yet)
+  const setModeHandler = () => {
+    isLoginMode ? setIsLoginMode(false) : setIsLoginMode(true);
+  };
 
   const onSubmit = async data => {
-    login(data.username, data.password)
-      .then(setLoading(false))
-      .then(console.log("done"))
-    //   .then(history("/"))
+    if (isLoginMode) {
+      try {
+        auth.login(data.username, data.password)
+      } catch (err) {}
+    } else {
+      try {
+        console.log("insert registration function");
+      } catch (err) {}
+    }
   }
-
 
   return (
     <div className="col-md-12">
@@ -40,12 +45,8 @@ const Login = () => {
           {/*{errors.username && errors.username.type === "maxLength" && <span>Max length exceeded</span> }*/}
           <input type="password" placeholder="password" {...register("password", {required: true, minLength: 3, maxLength: 16})} />
           {errors.password && errors.password.type === 'required' && <span>Password required</span>}
-          <input type="submit" />
-          <div className={"form-group"}>
-            {loading && (
-              <span className="spinner-border spinner-border-sm"></span>
-            )}
-          </div>
+          <input type="submit" value={isLoginMode ? "Login" : "register"}/>
+          <button onClick={setModeHandler}>Switch to {isLoginMode ? "register" : "login"}</button>
         </form>
       </div>
     </div>

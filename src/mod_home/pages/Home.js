@@ -13,7 +13,7 @@ const Home = () => {
       (error) => {
         const _content =
           (error.response && error.response.data) ||
-          error.message() ||
+          error.message ||
           error.toString();
 
         setContent(_content);
