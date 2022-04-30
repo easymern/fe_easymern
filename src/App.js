@@ -52,12 +52,19 @@ function App() {
         logout: logout
       }}
     >
+
       <div className="container-fluid">
         <div className="row">
           <div className="col content">
             <Router>
               <MainNavigation />
-              <main>{routes}</main>
+              <div className={"container"}>
+                <div className={"row"}>
+                  <div className={"col-md-12"}>
+                    <main>{routes}</main>
+                  </div>
+                </div>
+              </div>
             </Router>
           </div>
         </div>
