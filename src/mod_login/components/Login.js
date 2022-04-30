@@ -25,7 +25,6 @@ const Login = () => {
 
     if (isLoginMode) {
       const responseData = await AuthService.login(data.username, data.password)
-      // TODO currently setting two tokens :) (Auth-service l21.
       auth.login(
         responseData.id,
         responseData.accessToken,
@@ -33,26 +32,50 @@ const Login = () => {
         responseData.roles,
         responseData.username
       )
-      // auth.login(responseData.id, responseData.accessToken)
     }
   }
 
   return (
-    <div className="col-md-12">
-      <div className="card card-container">
+    <React.Fragment>
+      <div className={"card"}>
+        <div className={"card-body"}>
+        <form className="row gy-2 gx-3 align-items-center" onSubmit={handleSubmit(onSubmit)}>
+          <div className="col-auto">
+            <label htmlFor="username" className="visually-hidden">Username</label>
+            <div className="input-group">
+              <div className="input-group-text">@</div>
+              <input
+                id={"username"}
+                className={"form-control"}
+                type="text"
+                placeholder="username" {...register("username", {required: true, minLength: 3, maxLength: 18})}
+              />
+            </div>
+            {errors.username && errors.username.type === 'required' && <span>Username required</span>}
+          </div>
+          <div className={"col-auto"}>
+            <label htmlFor="password" className="visually-hidden">Password</label>
+            <div className="input-group">
+              <div className="input-group-text">&nbsp;P&nbsp;</div>
+              <input
+                id={"password"}
+                className={"form-control"}
+                type="password"
+                placeholder="password" {...register("password", {required: true, minLength: 3, maxLength: 16})}
+              />
+            </div>
+            {errors.password && errors.password.type === 'required' && <span>Password required</span>}
+          </div>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <input type="text" placeholder="username" {...register("username", {required: true, minLength: 3, maxLength: 18})} />
-          {/*{errors.username?.type === 'required' && "Username is required"}*/}
-          {errors.username && errors.username.type === 'required' && <span>Username required</span>}
-          {/*{errors.username && errors.username.type === "maxLength" && <span>Max length exceeded</span> }*/}
-          <input type="password" placeholder="password" {...register("password", {required: true, minLength: 3, maxLength: 16})} />
-          {errors.password && errors.password.type === 'required' && <span>Password required</span>}
-          <input type="submit" value={isLoginMode ? "Login" : "register"}/>
-          <button onClick={setModeHandler}>Switch to {isLoginMode ? "register" : "login"}</button>
+            <div className="col-auto">
+              <button type="submit" value={isLoginMode ? "Login" : "register"} className="btn btn-primary">Submit</button>
+            </div>
+            {/*<input type="submit" value={isLoginMode ? "Login" : "register"}/>*/}
+            {/*<button onClick={setModeHandler}>Switch to {isLoginMode ? "register" : "login"}</button>*/}
         </form>
+        </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 

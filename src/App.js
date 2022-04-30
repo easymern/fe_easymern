@@ -14,7 +14,7 @@ import MainNavigation from "./mod_shared/components/Navigation/MainNavigation";
 import Home from "./mod_home/pages/Home";
 import Login from "./mod_login/components/Login";
 import Register from "./mod_login/components/Register";
-import Footer from "./mod_shared/components/Navigation/Footer";
+import Footer from "./mod_shared/components/Footer";
 
 import { AuthContext } from "./mod_shared/context/auth-context";
 import { useAuth } from "./mod_shared/hooks/auth-hook";
@@ -52,12 +52,19 @@ function App() {
         logout: logout
       }}
     >
+
       <div className="container-fluid">
         <div className="row">
           <div className="col content">
             <Router>
               <MainNavigation />
-              <main>{routes}</main>
+              <div className={"container"}>
+                <div className={"row"}>
+                  <div className={"col-md-12"}>
+                    <main>{routes}</main>
+                  </div>
+                </div>
+              </div>
             </Router>
           </div>
         </div>
