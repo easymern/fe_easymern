@@ -4,10 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from 'yup';
 
-import { AuthContext } from "../../mod_shared/context/auth-context";
+import AuthService from "../../services/auth.service";
 
 const Register = () => {
-  const auth = useContext(AuthContext);
   const history = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -33,16 +32,9 @@ const Register = () => {
   const { errors } = formState;
 
   const onSubmit = async data => {
-      try {
-        await auth.signup(data.username, data.email, data.password);
-        // navigate("/", { replace: true });
-      } catch (err) {}
-
-    // console.log(JSON.stringify(data));
-    // await AuthService.register(data.username, data.email, data.password)
-    //   .then(history("/login"))
-    // // TODO add global state for flash message "thanks you can now login"
-    // // TODO check for errors parsed from backend (ie duplicate user)
+    console.log(JSON.stringify(data));
+    const response = await AuthService.register(data.username, data.email, data.password);
+    console.log(response)
   }
 
   return (

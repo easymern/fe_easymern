@@ -3,11 +3,14 @@ import axios from "axios";
 const API_URL = "http://localhost:3001/api-v1/auth/";
 
 const register = (username, email, password) => {
-  return axios.post(API_URL + "signup", {
+  return axios.post(API_URL + "register", {
     username,
     email,
     password,
-  });
+  })
+    .then((response) => {
+      return response;
+    });
 };
 
 const login = (username, password) => {
@@ -18,12 +21,6 @@ const login = (username, password) => {
     })
     .then((response) => {
       return response.data;
-      // if (response.data.accessToken) {
-      //   console.log(response.data);
-      //   localStorage.setItem("user", JSON.stringify(response.data));
-      // }
-      //
-      // return response.data;
     });
 };
 

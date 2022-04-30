@@ -44,16 +44,7 @@ export const useAuth = () => {
       })
     );
   }, []);
-
-  const signup = useCallback((uid, username, email, password) => {
-    console.log("signing up");
-    return axios.post(API_URL + "register", {
-      username,
-      email,
-      password
-    });
-  }, []);
-
+  
   const logout = useCallback(() => {
     // reset states and remove token.
     setToken(null);
@@ -76,7 +67,6 @@ export const useAuth = () => {
 
   return {
     token,
-    signup,
     login,
     logout,
     userId
