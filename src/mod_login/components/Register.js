@@ -38,50 +38,66 @@ const Register = () => {
   }
 
   return (
-    <div className="col-md-12">
-      <div className="card card-container">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className={"form-group"}>
-            <input
-              type="text"
-              placeholder="username" {...register("username")}
-              className={`form-control ${errors.username ? 'is-invalid' : ''}`}
-            />
-            <div className="invalid-feedback">{errors.username?.message}</div>
-          </div>
-          <div className={"form-group"}>
-            <input
-              type="text"
-              placeholder="email" {...register("email")}
-              className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-            />
-            <div className="invalid-feedback">{errors.email?.message}</div>
-          </div>
+    <React.Fragment>
+      <div className={"card"}>
+        <div className={"card-body"}>
 
-          <div className={"form-group"}>
-            <input
-              type="password"
-              placeholder="password" {...register('password')}
-              className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-            />
-            <div className="invalid-feedback">{errors.password?.message}</div>
-          </div>
+          <form onSubmit={handleSubmit(onSubmit)}>
+              <div className={"col-6 form-group"}>
+                <label className={"visually-hidden"} htmlFor={"username"}>Username</label>
+                <input
+                  id={"username"}
+                  type="text"
+                  placeholder="username" {...register("username")}
+                  className={`form-control ${errors.username ? 'is-invalid' : ''}`}
+                />
+                <div className="invalid-feedback">{errors.username?.message}</div>
+              </div>
 
-          <div className={"form-group"}>
-            <input
-              name="confirmPassword"
-              type="password"
-              placeholder="again"
-              {...register('confirmPassword')}
-              className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
-            />
-            <div className="invalid-feedback">{errors.confirmPassword?.message}</div>
-          </div>
+            <div className={"col-6 form-group"}>
+              <label className={"visually-hidden"} htmlFor={"email"}>Email</label>
+              <input
+                id={"email"}
+                type="text"
+                placeholder="email" {...register("email")}
+                className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+              />
+              <div className="invalid-feedback">{errors.email?.message}</div>
+            </div>
 
-          <input type="submit" value={"register"} />
-        </form>
+            <div className={"col-6 form-group"}>
+              <label className={"visually-hidden"} htmlFor={"password"}>Password</label>
+              <input
+                id={"password"}
+                type="password"
+                placeholder="password" {...register('password')}
+                className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+              />
+              <div className="invalid-feedback">{errors.password?.message}</div>
+            </div>
+
+            <div className={"col-6 form-group"}>
+              <label className={"visually-hidden"} htmlFor={"confirmPassword"}>Confirm Password</label>
+              <input
+                id={"confirmPassword"}
+                name="confirmPassword"
+                type="password"
+                placeholder="again"
+                {...register('confirmPassword')}
+                className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
+              />
+              <div className="invalid-feedback">{errors.confirmPassword?.message}</div>
+            </div>
+
+            <div className="col-auto form-group">
+              <button type="submit" className="btn btn-primary">Register</button>
+            </div>
+
+          </form>
+
+        </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 
