@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import AuthService from "../../services/auth.service";
 
 const Register = () => {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   // Using yup as per this example https://www.positronx.io/add-confirm-password-validation-in-react-with-hook-form/
@@ -34,14 +34,14 @@ const Register = () => {
   const onSubmit = async data => {
     console.log(JSON.stringify(data));
     const response = await AuthService.register(data.username, data.email, data.password);
-    console.log(response)
+    navigate('/login');
   }
 
   return (
     <React.Fragment>
       <div className={"card"}>
         <div className={"card-body"}>
-
+          <h3>Signup!</h3>
           <form onSubmit={handleSubmit(onSubmit)}>
               <div className={"col-6 form-group"}>
                 <label className={"visually-hidden"} htmlFor={"username"}>Username</label>

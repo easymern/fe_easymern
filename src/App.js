@@ -18,6 +18,7 @@ import Footer from "./mod_shared/components/Footer";
 
 import { AuthContext } from "./mod_shared/context/auth-context";
 import { useAuth } from "./mod_shared/hooks/auth-hook";
+import Profile from "./mod_user/pages/Profile";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
       <Routes>
         <Route path={"/"} exact element={<Home />} />
         <Route path="/" element={<Navigate replace to="/home" />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     );
   } else {
@@ -35,7 +37,6 @@ function App() {
       <Routes>
         <Route path={"/"} exact element={<Home />} />
         <Route path="/login" exact element={<Login />} />
-
         <Route path="/register" exact element={<Register />} />
         <Route path="/" element={<Navigate replace to="/" />} />
       </Routes>
