@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react';
-import {set, useForm} from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from "react-router-dom";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from 'yup';
 
 import AuthService from "../../services/auth.service";
 import {AuthContext} from "../../mod_shared/context/auth-context";
@@ -12,9 +14,17 @@ const Login = () => {
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [loading, setLoading] = useState(false);
 
+  const formSchema = Yup.object().shape({
+    username: Yup.string()
+      .required("Username is required"),
+    password: Yup.string()
+      .required("Needs a password."),
+  })
 
-  // Use the forms state for the form.
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const formOptions = {resolver: yupResolver(formSchema)};
+  const { register, handleSubmit, reset, formState } = useForm(formOptions);
+  const { errors } = formState;
+
 
   // Switch between login / register (not built yet)
   const setModeHandler = () => {
@@ -40,38 +50,45 @@ const Login = () => {
       <div className={"card"}>
         <div className={"card-body"}>
         <form className="row gy-2 gx-3 align-items-center" onSubmit={handleSubmit(onSubmit)}>
+
+          {/*Username*/}
           <div className="col-auto">
             <label htmlFor="username" className="visually-hidden">Username</label>
             <div className="input-group">
               <div className="input-group-text">@</div>
               <input
                 id={"username"}
-                className={"form-control"}
+                className={`form-control ${errors.username ? 'is-invalid' : ''}`}
                 type="text"
-                placeholder="username" {...register("username", {required: true, minLength: 3, maxLength: 18})}
+                placeholder="username" {...register("username")}
               />
+              <div className="invalid-feedback username">{errors.username?.message}</div>
+
             </div>
-            {errors.username && errors.username.type === 'required' && <span>Username required</span>}
           </div>
+
+          {/*Password*/}
           <div className={"col-auto"}>
             <label htmlFor="password" className="visually-hidden">Password</label>
             <div className="input-group">
               <div className="input-group-text">&nbsp;P&nbsp;</div>
               <input
                 id={"password"}
-                className={"form-control"}
+                className={`form-control ${errors.password ? 'is-invalid' : ''}`}
                 type="password"
-                placeholder="password" {...register("password", {required: true, minLength: 3, maxLength: 16})}
+                placeholder="password" {...register("password")}
               />
+              <div className="invalid-feedback password">{errors.password?.message}</div>
             </div>
-            {errors.password && errors.password.type === 'required' && <span>Password required</span>}
           </div>
 
-            <div className="col-auto">
-              <button type="submit" value={isLoginMode ? "Login" : "register"} className="btn btn-primary">Submit</button>
-            </div>
-            {/*<input type="submit" value={isLoginMode ? "Login" : "register"}/>*/}
-            {/*<button onClick={setModeHandler}>Switch to {isLoginMode ? "register" : "login"}</button>*/}
+          {/*Submit*/}
+          <div className="col-auto">
+            <button type="submit" value={isLoginMode ? "Login" : "register"} className="btn btn-primary">Submit</button>
+          </div>
+
+          {/*<input type="submit" value={isLoginMode ? "Login" : "register"}/>*/}
+          {/*<button onClick={setModeHandler}>Switch to {isLoginMode ? "register" : "login"}</button>*/}
         </form>
         </div>
       </div>
