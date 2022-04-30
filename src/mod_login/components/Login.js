@@ -86,7 +86,7 @@ const Login = () => {
 
             {/*Submit*/}
             <div className="col-auto">
-              <button type="submit" value={isLoginMode ? "Login" : "register"} className="btn btn-primary">Submit</button>
+              <button type="submit" value={isLoginMode ? "Login" : "register"} className="btn btn-primary">{isLoginMode ? "Login" : "register"}</button>
             </div>
 
             {/*<input type="submit" value={isLoginMode ? "Login" : "register"}/>*/}

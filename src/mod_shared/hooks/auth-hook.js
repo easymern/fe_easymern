@@ -1,5 +1,4 @@
 import { useState, useCallback, useEffect } from "react";
-import axios from "axios";
 let logoutTimer;
 
 export const useAuth = () => {
@@ -13,15 +12,11 @@ export const useAuth = () => {
 
 
   const login = useCallback((uid, token, email, roles, username, expirationDate) => {
-  // const login = useCallback((uid, resData) => {
-
     // Set a token for storage.
     setToken(token);
     setUserId(uid);
     setEmail(email);
     setRoles(roles);
-
-    console.log(token, userId, email, roles,username);
 
     let tempExpDate = typeof expirationDate;
     tempExpDate = tempExpDate ? expirationDate : tempExpDate;
@@ -54,6 +49,15 @@ export const useAuth = () => {
   }, [])
 
   useEffect(() => {
+    if (token && tokenExpirationDate) {
+      const remainingTime = tokenExpirationDate.getTime() - new Date().getTime();
+      logoutTimer = setTimeout(logout, remainingTime);
+    } else {
+      clearTimeout(logoutTimer);
+    }
+  }, [token, logout, tokenExpirationDate]);
+
+  useEffect(() => {
     // Ensure user automatically logged in.
     const storedData = JSON.parse(localStorage.getItem('userData'));
     if (
@@ -61,7 +65,14 @@ export const useAuth = () => {
       && storedData.token
       && new Date(storedData.expiration) > new Date()
     ) {
-      login(storedData.userId, storedData.token, new Date(storedData.expiration));
+      login(
+        storedData.userId,
+        storedData.token,
+        storedData.email,
+        storedData.roles,
+        storedData.username,
+        new Date(storedData.expiration)
+      );
     }
   }, [login]);
 

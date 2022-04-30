@@ -5,6 +5,14 @@ import authHeader from "./auth-header";
 
 const API_URL = "http://localhost:3001/api-v1/user/";
 
+const getAdminStatus = () => {
+  console.log(authHeader());
+  return axios.get(API_URL + "test/mod", { headers: authHeader })
+    .then(res => {
+      console.log(res)
+    })
+}
+
 const getPublicContent = () => {
   return axios.get(API_URL + "test/all");
 }
@@ -23,6 +31,7 @@ const getAdminBoard = () => {
 };
 
 export default {
+  getAdminStatus,
   getPublicContent,
   getUserBoard,
   getModeratorBoard,
