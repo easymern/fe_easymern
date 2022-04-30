@@ -7,23 +7,27 @@ export const useAuth = () => {
   const [token, setToken] = useState(false);
   const [tokenExpirationDate, setTokenExpirationDate] = useState();
   const [userId, setUserId] = useState(false);
+  const [email, setEmail] = useState(undefined);
+  const [roles, setRoles] = useState([]);
+  const [username, setUsername] = useState(undefined)
 
 
-  const signup = useCallback((username, email, password) => {
-    axios.post(API_URL + "register", {
-      username,
-      email,
-      password
-    }).then(res => this.login(username, email))
-  }, [])
+  const login = useCallback((uid, token, email, roles, username, expirationDate) => {
+  // const login = useCallback((uid, resData) => {
 
-  const login = useCallback((uid, token, expirationDate) => {
     // Set a token for storage.
     setToken(token);
     setUserId(uid);
+    setEmail(email);
+    setRoles(roles);
+
+    console.log(token, userId, email, roles,username);
+
+    let tempExpDate = typeof expirationDate;
+    tempExpDate = tempExpDate ? expirationDate : tempExpDate;
 
     // Add a token expiration date.
-    const tokenExpirationDate = expirationDate ||
+    const tokenExpirationDate = tempExpDate ||
       new Date(new Date().getTime() + 1000 * 60 * 60);
     setTokenExpirationDate(tokenExpirationDate);
 
@@ -33,11 +37,14 @@ export const useAuth = () => {
       JSON.stringify({
         userId: uid,
         token: token,
+        email: email,
+        roles: roles,
+        username: username,
         expiration: tokenExpirationDate.toISOString()
       })
     );
   }, []);
-
+  
   const logout = useCallback(() => {
     // reset states and remove token.
     setToken(null);
@@ -60,7 +67,6 @@ export const useAuth = () => {
 
   return {
     token,
-    signup,
     login,
     logout,
     userId

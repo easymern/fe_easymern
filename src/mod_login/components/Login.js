@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import {set, useForm} from 'react-hook-form';
 import { useNavigate } from "react-router-dom";
 
+import AuthService from "../../services/auth.service";
 import {AuthContext} from "../../mod_shared/context/auth-context";
 
 const Login = () => {
@@ -23,14 +24,16 @@ const Login = () => {
   const onSubmit = async data => {
 
     if (isLoginMode) {
-      try {
-        await auth.login(data.username, data.password);
-        navigate("/", { replace: true });
-      } catch (err) {}
-    } else {
-      try {
-        console.log("insert registration function");
-      } catch (err) {}
+      const responseData = await AuthService.login(data.username, data.password)
+      // TODO currently setting two tokens :) (Auth-service l21.
+      auth.login(
+        responseData.id,
+        responseData.accessToken,
+        responseData.email,
+        responseData.roles,
+        responseData.username
+      )
+      // auth.login(responseData.id, responseData.accessToken)
     }
   }
 
