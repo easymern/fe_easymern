@@ -20,13 +20,18 @@ const NavLinks = props => {
       )}
 
       {!auth.isLoggedIn && (
-        <li className="nav-item">
-          <NavLink className={"nav-link"} to="/login">login</NavLink>
-        </li>
+        <React.Fragment>
+          <li className="nav-item">
+            <NavLink className={"nav-link"} to="/login">Login</NavLink>
+          </li>
+          <li className="nav-item">
+          <NavLink className={"nav-link"} to="/register">Register</NavLink>
+          </li>
+        </React.Fragment>
       )}
       {auth.isLoggedIn && (
         <li className="nav-item">
-          <button className={"nav-link"} onClick={auth.logout}>LOGOUT</button>
+          <NavLink className={"nav-link"} to="/login" onClick={auth.logout}>Logout</NavLink>
         </li>
       )}
 
