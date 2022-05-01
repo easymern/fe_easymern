@@ -1,25 +1,31 @@
 import React, {useEffect, useState} from 'react';
-import UserService from "../../services/user.service";
+import { useHttpClient } from "../../common/hooks/http-hook";
+import authHeader from "../../common/services/auth-header";
+
+import UserService from "../../common/services/user-service";
 
 
 const Profile = () => {
+  const API_URL = "http://localhost:3001/api-v1/user/";
+  const {isLoading, sendRequest } = useHttpClient();
   const [content, setContent] = useState();
-  useEffect(() => {
-    UserService.getAdminStatus().then(
-    // UserService.getPublicContent().then(
-      (response) => {
-        setContent(response)
-      },
-      (error) => {
-        const _content =
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString();
 
-        setContent(_content);
-      }
-    );
-  },[]);
+  useEffect(() => {
+    const onLoad = async () => {
+      try {
+        const responseData = await sendRequest(
+          API_URL + "test/mod",
+          "GET",
+          null,
+          authHeader()
+        );
+        setContent(responseData.message);
+      } catch (err) {}
+    };
+    onLoad()
+
+  },[sendRequest]);
+
 
   return (
     <div className={"card"}>

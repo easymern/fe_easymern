@@ -4,15 +4,19 @@ import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from 'yup';
 
-import AuthService from "../../services/auth.service";
-import {AuthContext} from "../../shared/context/auth-context";
+import {AuthContext} from "../../common/context/auth-context";
+import {useHttpClient} from "../../common/hooks/http-hook";
 
 const Login = () => {
+  const API_URL = "http://localhost:3001/api-v1/auth/";
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
 
+  // Implement or remove.
   const [isLoginMode, setIsLoginMode] = useState(true);
-  const [loading, setLoading] = useState(false);
+
+  // Load for requests
+  const {isLoading, sendRequest } = useHttpClient();
 
   const formSchema = Yup.object().shape({
     username: Yup.string()
@@ -34,7 +38,18 @@ const Login = () => {
   const onSubmit = async data => {
 
     if (isLoginMode) {
-      const responseData = await AuthService.login(data.username, data.password)
+      const responseData = await sendRequest(
+        API_URL + "login",
+        'POST',
+        JSON.stringify({
+          username: data.username,
+          password: data.password
+        }),
+        {
+          'Content-Type': 'application/json'
+        }
+      )
+      // const responseData = await AuthService.login(data.username, data.password)
       await auth.login(
         responseData.id,
         responseData.accessToken,

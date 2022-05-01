@@ -4,11 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from 'yup';
 
-import AuthService from "../../services/auth.service";
+import AuthService from "../../common/services/auth-service";
+import { useHttpClient } from "../../common/hooks/http-hook";
 
 const Register = () => {
+  const API_URL = "http://localhost:3001/api-v1/auth/";
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+  // Load for requests
+  const {isLoading, sendRequest } = useHttpClient();
 
   // Using yup as per this example https://www.positronx.io/add-confirm-password-validation-in-react-with-hook-form/
   const formSchema = Yup.object().shape({
@@ -32,8 +35,19 @@ const Register = () => {
   const { errors } = formState;
 
   const onSubmit = async data => {
-    console.log(JSON.stringify(data));
-    const response = await AuthService.register(data.username, data.email, data.password);
+    const responseData = await sendRequest(
+      API_URL + "register",
+      'POST',
+      JSON.stringify({
+        username: data.username,
+        password: data.password,
+        email: data.email
+      }),
+      {
+        'Content-Type': 'application/json'
+      }
+    )
+    // const response = await AuthService.register(data.username, data.email, data.password);
     navigate('/login');
   }
 

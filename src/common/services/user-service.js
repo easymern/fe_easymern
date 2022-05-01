@@ -1,20 +1,14 @@
 import axios from "axios";
 import authHeader from "./auth-header";
+// import {useHttpClient} from "../hooks/http-hook";
 
 // Hit the API for the data.
 
 const API_URL = "http://localhost:3001/api-v1/user/";
 
-const getAdminStatus = () => {
-  console.log(authHeader());
-  return axios.get(API_URL + "test/mod", { headers: authHeader })
-    .then(res => {
-      console.log(res)
-    })
-}
 
-const getPublicContent = () => {
-  return axios.get(API_URL + "test/all");
+const getAdminStatus = () => {
+  return axios.get(API_URL + "test/mod", { headers: authHeader })
 }
 
 const getUserBoard = () => {
@@ -32,7 +26,7 @@ const getAdminBoard = () => {
 
 export default {
   getAdminStatus,
-  getPublicContent,
+  // getPublicContent,
   getUserBoard,
   getModeratorBoard,
   getAdminBoard

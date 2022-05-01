@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import { NavLink } from "react-router-dom";
-import { AuthContext } from "../../context/auth-context";
+import { AuthContext } from "../../../common/context/auth-context";
 
 
 const NavLinks = props => {

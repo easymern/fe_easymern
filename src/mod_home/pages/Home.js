@@ -1,25 +1,23 @@
 import React, {useEffect, useState} from "react";
-
-import UserService from "../../services/user.service";
+import { useHttpClient } from "../../common/hooks/http-hook";
 
 const Home = () => {
+  const API_URL = "http://localhost:3001/api-v1/user/";
+  const {isLoading, sendRequest } = useHttpClient();
   const [content, setContent] = useState("");
 
   useEffect(() => {
-    UserService.getUserBoard().then(
-      (response) => {
-        setContent(response.data);
-      },
-      (error) => {
-        const _content =
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString();
+    const onLoad = async () => {
+      try {
+        const responseData = await sendRequest(
+          API_URL + "test/all"
+        );
+        setContent(responseData.message);
+      } catch (err) {}
+    };
+    onLoad()
 
-        setContent(_content);
-      }
-    );
-  },[]);
+  },[sendRequest]);
 
   return (
     <div className={"container"}>

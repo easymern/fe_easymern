@@ -10,14 +10,14 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 
-import MainNavigation from "./shared/components/Navigation/MainNavigation";
+import MainNavigation from "./mod_shared/components/Navigation/MainNavigation"
 import Home from "./mod_home/pages/Home";
 import Login from "./mod_login/components/Login";
 import Register from "./mod_login/components/Register";
-import Footer from "./shared/components/Footer";
+import Footer from "./mod_shared/components/Footer";
 
-import { AuthContext } from "./shared/context/auth-context";
-import { useAuth } from "./shared/hooks/auth-hook";
+import { AuthContext } from "./common/context/auth-context";
+import { useAuth } from "./common/hooks/auth-hook";
 import Profile from "./mod_user/pages/Profile";
 
 
