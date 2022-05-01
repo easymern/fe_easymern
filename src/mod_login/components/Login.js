@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from 'yup';
 
 import AuthService from "../../services/auth.service";
-import {AuthContext} from "../../mod_shared/context/auth-context";
+import {AuthContext} from "../../shared/context/auth-context";
 
 const Login = () => {
   const auth = useContext(AuthContext);
