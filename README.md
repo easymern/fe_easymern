@@ -16,14 +16,10 @@
 ## Description
 Ready to go frontend for [![easymern](https://img.shields.io/badge/easymern-brightgreen)](https://github.com/easymern)
 stack.
-* [![Bootstrap](https://img.shields.io/badge/Bootstrap-blue)](https://getbootstrap.com)
-  * very minimal use, you can easily swap it out for something else.
-* [![Axios](https://img.shields.io/badge/Axios-blue)](#)
-  * Currently swapping this out for simple Fetch requests (just to remove the additional library. If you want Axios features, you can add it back in)
-* [![Yup!](https://img.shields.io/badge/Yup!-blue)](https://github.com/jquense/yup)
-  * for form validation.
-* [![React-hook-form](https://img.shields.io/badge/ReactHookForm-blue)](https://react-hook-form.com/get-started)
-  * for form management.
+* [![Bootstrap](https://img.shields.io/badge/Bootstrap-blue)](https://getbootstrap.com) very minimal use, you can easily swap it out for something else.
+* [![Axios](https://img.shields.io/badge/Axios-blue)](#) Currently swapping this out for simple Fetch requests (just to remove the additional library. If you want Axios features, you can add it back in)
+* [![Yup!](https://img.shields.io/badge/Yup!-blue)](https://github.com/jquense/yup) for form validation.
+* [![React-hook-form](https://img.shields.io/badge/ReactHookForm-blue)](https://react-hook-form.com/get-started) for form management.
 
 [//]: # (* [view deployed on github]&#40;https://jayarghargh.github.io/jrr-react/#/&#41;)
 
