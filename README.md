@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# [fe_easymern](https://github.com/easymern/fe_easymern)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![License: MIT](easymern_small_50.png)](https://opensource.org/licenses/MIT)
 
-## Available Scripts
+## Table of Contents
+> - [Description](#Description)
+> - [Table of Contents](#Table-of-Contents)
+> - [Installation](#Installation)
+> - [Usage](#Usage)
+> - [License](#License)
+> - [Contributing](#Contributing)
+> - [Tests](#Tests)
+> - [Questions](#Questions)
 
-In the project directory, you can run:
+## Description
+Ready to go frontend for [![easymern](https://img.shields.io/badge/easymern-brightgreen)](https://github.com/easymern)
+stack.
+* [![Bootstrap](https://img.shields.io/badge/Bootstrap-blue)](https://getbootstrap.com)
+  * very minimal use, you can easily swap it out for something else.
+* [![Axios](https://img.shields.io/badge/Axios-blue)](#)
+  * Currently swapping this out for simple Fetch requests (just to remove the additional library. If you want Axios features, you can add it back in)
+* [![Yup!](https://img.shields.io/badge/Yup!-blue)](https://github.com/jquense/yup)
+  * for form validation.
+* [![React-hook-form](https://img.shields.io/badge/ReactHookForm-blue)](https://react-hook-form.com/get-started)
+  * for form management.
 
-### `npm start`
+[//]: # (* [view deployed on github]&#40;https://jayarghargh.github.io/jrr-react/#/&#41;)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Installation
+```
+npm install
+npm update
+```
+## Usage
+Once you have this and be_easymern installed, you should be ok to start building your app.
+## License
+This application is covered under The MIT License.
+## Contributing
+This project needs your help :) Jump in at the deep end with a fork and bash away at any issues you see. Thanks.
+## Tests
+No tests developed as at 02 May 2022
+## Questions
+Please refer any questions to [![JayArghArgh](https://img.shields.io/badge/Dev-JayArghArgh-yellow)](https://github.com/JayArghArgh) via jayarghargh@gmail.com.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[![Anurag's github stats](https://github-readme-stats.vercel.app/api?username=JayArghArgh&theme=solarized-light)](https://github.com/JayArghArgh/github-readme-stats)
