@@ -6,7 +6,7 @@ const MainHeader = (props) => {
       <nav className="navbar navbar-fluid navbar-expand-lg navbar-light bg-light">
         <nav className="navbar navbar-light bg-light">
           <a className="navbar-brand" href="/">
-            &nbsp;BoilerPlate
+            &nbsp;easyMERN
           </a>
         </nav>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

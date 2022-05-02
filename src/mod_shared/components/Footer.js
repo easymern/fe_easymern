@@ -6,24 +6,31 @@ const Footer = () => {
       <div className={"container"}>
         <div className={"row"}>
           <div className={"col-4"}>
-            <p>Created by @jayArghArgh</p>
+            Created by <a href="https://github.com/jayarghargh">JayArghArgh</a>
           </div>
           <div className={"col-4"}>
-            <h3>Links</h3>
-            <ul>
-              <li>Github</li>
-              <li>LinkedIn</li>
-              <li>Dev.to</li>
-              <li>Ko-fi (https://dev.to/jayarghargh)</li>
-            </ul>
+            <h3>Backend</h3>
+            <li className="nav-item">
+              <a href="https://github.com/easymern/be_easymern">GitHub</a>
+            </li>
+            <li className="nav-item">
+              <a href="https://github.com/easymern/be_easymern/wiki">Wiki</a>
+            </li>
+            <li className="nav-item">
+              <a href="https://github.com/easymern/be_easymern/issues">Issues</a>
+            </li>
           </div>
           <div className={"col-4"}>
-            <h3>Contact</h3>
-            <ul>
-              <li>My Blog</li>
-              <li>Email</li>
-              <li>Twitter</li>
-            </ul>
+            <h3>Frontend</h3>
+            <li className="nav-item">
+              <a href="https://github.com/easymern/fe_easymern">GitHub</a>
+            </li>
+            <li className="nav-item">
+              <a href="https://github.com/easymern/fe_easymern/wiki">Wiki</a>
+            </li>
+            <li className="nav-item">
+              <a href="https://github.com/easymern/fe_easymern/issues">Issues</a>
+            </li>
           </div>
         </div>
 

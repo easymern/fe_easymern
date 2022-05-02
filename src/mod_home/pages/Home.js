@@ -22,6 +22,7 @@ const Home = () => {
   return (
     <div className={"container"}>
       <header className={"jumbotron"}>
+        <div><img src={"easymern_alt_50.png"} /> </div>
         <div>{content}</div>
       </header>
     </div>
